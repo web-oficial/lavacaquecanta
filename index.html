@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Vaca que Canta | Domicilios en Ibagué</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Poppins, sans-serif;
+  background:#eae6df;
+}
+
+/* LATERALES */
+.lateral{
+  position:fixed;
+  top:0;
+  width:8%;
+  height:100vh;
+  background:url("imagenes/fondo-vaca.png") repeat;
+  background-size:180px 180px;
+  z-index:1;
+}
+.lateral.izquierda{left:0;}
+.lateral.derecha{right:0;}
+
+/* CONTENIDO */
+.contenido{
+  margin-left:8%;
+  margin-right:8%;
+  background:#fff;
+  position:relative;
+  z-index:2;
+}
+
+/* HEADER */
+header{
+  background:#000;
+  color:#fff;
+  padding:20px;
+}
+.header-flex{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:20px;
+}
+.header-flex img{
+  height:80px;
+}
+.header-text h1{
+  margin:0;
+  font-size:2.3em;
+}
+.header-text p{
+  margin:0;
+  font-size:0.95em;
+  opacity:.9;
+}
+
+/* NAV */
+nav{
+  background:#f2f2f2;
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  padding:12px;
+  font-weight:600;
+}
+nav a{
+  text-decoration:none;
+  color:#000;
+}
+
+/* SECCIONES */
+section{
+  padding:50px 30px;
+  text-align:center;
+}
+h2{
+  font-size:2em;
+  margin-bottom:30px;
+}
+h3.titulo-seccion{
+  margin-top:60px;
+  margin-bottom:30px;
+  font-size:1.8em;
+}
+
+/* PRODUCTOS */
+.productos-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;
+  max-width:1200px;
+  margin:auto;
+}
+.producto{
+  background:#fafafa;
+  border-radius:15px;
+  padding:20px;
+  box-shadow:0 4px 10px rgba(0,0,0,.08);
+}
+.producto img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+/* BOTÓN WHATSAPP */
+.btn-whatsapp{
+  display:inline-block;
+  margin-top:10px;
+  padding:10px 18px;
+  background:#25D366;
+  color:#fff;
+  text-decoration:none;
+  border-radius:25px;
+  font-weight:600;
+  transition:background .3s, transform .2s;
+}
+.btn-whatsapp:hover{
+  background:#1b6137;
+  transform:scale(1.03);
+}
+.btn-whatsapp:active{
+  background:#189e4c;
+  transform:scale(.98);
+}
+
+/* FOOTER */
+footer{
+  background:#000;
+  color:#fff;
+  text-align:center;
+  padding:20px;
+  font-size:.9em;
+}
+
+/* WHATSAPP FLOTANTE */
+.whatsapp-flotante{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 4px 12px rgba(0,0,0,.3);
+  z-index:9999;
+  transition:transform .2s, background .3s;
+}
+
+.whatsapp-flotante img{
+  width:32px;
+  height:32px;
+}
+
+.whatsapp-flotante:hover{
+  background:#1ebe5d;
+  transform:scale(1.08);
+}
+
+/* NAV FIJO */
+nav{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0,0,0,.1);
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+
+#carrito{
+background:#fafafa;
+padding:40px;
+text-align:center;
+margin-top:40px;
+}
+
+#lista-carrito{
+max-width:600px;
+margin:auto;
+text-align:left;
+margin-bottom:20px;
+}
+
+#lista-carrito p{
+padding:8px 0;
+border-bottom:1px solid #ddd;
+}
+
+#enviar-whatsapp{
+background:#25D366;
+color:white;
+border:none;
+padding:12px 25px;
+border-radius:25px;
+font-size:16px;
+cursor:pointer;
+}
+
+#enviar-whatsapp:hover{
+background:#1ebd5a;
+}
+
+#metodos-pago{
+text-align:center;
+padding:40px;
+background:#fff8f8;
+margin-top:40px;
+}
+
+.pagos-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:30px;
+max-width:700px;
+margin:auto;
+}
+
+.pago-box{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.pago-box img{
+width:200px;
+margin:10px auto;
+display:block;
+}
+
+nav{
+display:flex;
+overflow-x:auto;
+white-space:nowrap;
+gap:10px;
+padding:10px;
+}
+
+nav a{
+flex:0 0 auto;
+}
+
+.carrito-flotante{
+position:fixed;
+bottom:90px;
+right:20px;
+background:#ff4d4d;
+color:white;
+font-size:20px;
+padding:12px 18px;
+border-radius:30px;
+text-decoration:none;
+box-shadow:0 4px 10px rgba(0,0,0,0.3);
+z-index:999;
+}
+
+.carrito-flotante:hover{
+background:#e63c3c;
+}
+
+#aviso-carrito{
+position:fixed;
+bottom:160px;
+right:20px;
+background:#28a745;
+color:white;
+padding:12px 20px;
+border-radius:10px;
+font-size:14px;
+box-shadow:0 4px 10px rgba(0,0,0,0.3);
+opacity:0;
+transition:opacity 0.3s;
+z-index:1000;
+}
+
+#carrito-ventana{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+z-index:2000;
+}
+
+.carrito-contenido{
+background:white;
+width:90%;
+max-width:400px;
+margin:60px auto;
+padding:20px;
+border-radius:10px;
+text-align:center;
+position:relative;
+}
+
+#cerrar-carrito{
+position:absolute;
+top:10px;
+right:15px;
+font-size:20px;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+<a class="whatsapp-flotante" 
+   href="https://wa.me/573108065132" 
+   target="_blank">
+  <img src="imagenes/whatsapp.png" alt="WhatsApp">
+</a>
+
+
+<a class="carrito-flotante" onclick="abrirCarrito()">
+🛒 <span id="contador-carrito">0</span>
+</a>
+
+<div id="aviso-carrito">
+✔ Producto agregado al carrito
+</div>
+
+<div id="carrito-ventana">
+
+<div class="carrito-contenido">
+
+<span id="cerrar-carrito" onclick="cerrarCarrito()">✖</span>
+
+<h2>🛒 Tu Pedido</h2>
+
+<div id="lista-carrito">
+<p>Aún no has agregado productos</p>
+</div>
+
+<h3 id="total">Total: $0</h3>
+
+<button id="enviar-whatsapp">Enviar pedido por WhatsApp</button>
+
+</div>
+
+</div>
+
+<div class="lateral izquierda"></div>
+<div class="lateral derecha"></div>
+
+<div class="contenido">
+
+<header>
+  <div class="header-flex">
+    <img src="imagenes/logo.jpg" alt="Logo La Vaca que Canta">
+    <div class="header-text">
+      <h1>La Vaca que Canta</h1>
+      <p>Domicilios en Ibagué · Compra fácil y rápida</p>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <a href="#inicio">Inicio</a>
+  <a href="#fresas">🍓 Fresas con Crema</a>
+  <a href="#postres">🍰 Postres</a>
+  <a href="#postres-en-general">🧀 Postres en general</a>
+  <a href="#bizcochos">🧀 Bizcochos</a>
+  <a href="#bebidas">🥤 Bebidas</a>
+  <a href="#pago">Pagos</a>
+</nav>
+
+
+<section id="inicio">
+  <h2>Bienvenidos</h2>
+  <p>Explora nuestros productos, paga y envía el comprobante por WhatsApp.</p>
+</section>
+
+<section id="productos">
+<h2>Nuestros Productos</h2>
+
+<!-- FRESAS CON CREMA -->
+<h3 id="fresas" class="titulo-seccion">🍓 Fresas con Crema</h3>
+<div class="productos-grid">
+
+<div class="producto">
+<img src="imagenes/fresas1.jpg">
+<h3>Fresas con crema</h3>
+<p style="font-size:.9em;color:#555;">Elige el tamaño</p>
+
+<a class="btn-whatsapp" onclick="agregarAlCarrito('7 onzas',8000)">
+$8.000
+</a>
+<a class="btn-whatsapp" onclick="agregarAlCarrito('9 onzas',10000)">
+$10.000
+</a>
+<a class="btn-whatsapp" onclick="agregarAlCarrito('12 onzas',12000)">
+$12.000
+</a>
+<a class="btn-whatsapp" onclick="agregarAlCarrito('14 onzas',14000)">
+$14.000
+</a>
+
+</div>
+
+<div class="producto">
+  <img src="imagenes/fresas2.jpg">
+  
+  <h3>La Especialidad de la Casa</h3>
+
+  <p style="font-size:.9em;color:#555;">
+    Crema, fresas, queso, salsa de mora y fresa, leche condensada, chocolate y melado de frutos rojos.
+  </p>
+
+  <a class="btn-whatsapp" onclick="agregarAlCarrito('La Especialidad de la Casa',18000)">
+    Precio – $18.000
+  </a>
+</div>
+
+<div class="producto">
+  <img src="imagenes/fresas3.jpg">
+  
+  <h3>Fresas con crema light</h3>
+
+  <p style="font-size:.85em;color:#777;">
+    Cremas sin azúcar
+  </p>
+
+  <a class="btn-whatsapp" onclick="agregarAlCarrito('12 onzas',12000)">
+    12 onzas – $12.000
+  </a>
+
+  <a class="btn-whatsapp" onclick="agregarAlCarrito('14 onzas',14000)">
+    14 onzas – $14.000
+  </a>
+</div>
+
+<div class="producto">
+  <img src="imagenes/fresas4.jpg">
+  <h3>La Súper Especial</h3>
+  <p style="font-size:.85em;color:#555;line-height:1.4;">
+    Crema, fresas, queso, salsas de mora y fresa, leche condensada, chocolate,
+    M y M, melado de frutos rojos, más helado, brownie y barquillos de chocolate.
+  </p>
+  <a class="btn-whatsapp" onclick="agregarAlCarrito('La Súper Especial',22000)">
+    $22.000
+  </a>
+</div>
+
+<div class="producto">
+  <img src="imagenes/fresas5.jpg">
+  <h3>Cono Vaquero</h3>
+  <p style="font-size:.85em;color:#555;line-height:1.4;">
+    Galleta del cono, crema, fresas, queso, salsas de mora y fresa,
+    leche condensada, chocolate, M&M, melado de frutos rojos,
+    más helado (escoge el sabor), barquillos de chocolate.
+  </p>
+  <a class="btn-whatsapp" onclick="agregarAlCarrito('Cono Vaquero',20000)">
+    $20.000
+  </a>
+</div>
+
+<div class="producto">
+  <img src="imagenes/brocheta1.jpg">
+
+  <h3>Brocheta con chocolate</h3>
+
+  <p style="font-size:.85em; color:#555;">
+    Chocolate blanco o negro y combinado
+  </p>
+
+  <a class="btn-whatsapp" onclick="agregarAlCarrito('Blanco',9000)">
+    Blanco:$9.000
+  </a>
+  <a class="btn-whatsapp" onclick="agregarAlCarrito('Negro',9000)">
+    Negro:$9.000
+  </a>
+  <a class="btn-whatsapp" onclick="agregarAlCarrito('Combinado',9000)">
+    Combinado:$9.000
+  </a>
+</div>
+
+<div class="producto">
+  <img src="imagenes/adicionales1.jpg">
+
+  <h3>Adicionales</h3>
+
+  <p style="font-size:.85em; color:#555; line-height:1.4;">
+    Salsa de chocolate, fresa, leche condensada, M&M y chocolates.<br>
+    También puedes agregar queso.
+  </p>
+
+  <a class="btn-whatsapp" onclick="agregarAlCarrito('Adicional',2000)">
+    Cada topping $2.000
+  </a>
+</div>
+
+</div>
+
+<!-- POSTRES -->
+<h3 id="postres" class="titulo-seccion">🍰 Postres</h3>
+<div class="productos-grid">
+
+<div class="producto">
+<img src="imagenes/postres1.jpg">
+<h3>De Maracuya</h3><p>Precio</p>
+<a class="btn-whatsapp" onclick="agregarAlCarrito('De Maracuya',10000)">
+  $10.000
+</a>
+</div>
+
+<div class="producto">
+<img src="imagenes/postres2.jpg">
+<h3>Chocolate Con Oreo</h3><p>Precio</p>
+<a class="btn-whatsapp" onclick="agregarAlCarrito('Chocolate Con Oreo',10000)">
+  $10.000
+</a>
+</div>
+
+<div class="producto"><img src="imagenes/postres3.JPG">
+<h3>Tres Leches Con Melado De Frutos Rojos</h3><p>Precio</p>
+<a class="btn-whatsapp" onclick="agregarAlCarrito('Tres Leches Con Melado De Frutos Rojos',10000)">
+  $10.000
+</a>
+</div>
+
+<div class="producto"><img src="imagenes/postres4.JPG">
+<h3>Cafe</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Cafe',10000)">$10.000</a></div>
+<div class="producto"><img src="imagenes/postres5.JPG">
+<h3>Limon</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Limon',10000)">$10.000</a></div>
+
+<div class="producto"><img src="imagenes/postres6.JPG">
+<h3>Duraznos</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Duraznos',10000)">$10.000</a></div>
+
+<div class="producto"><img src="imagenes/postres7.JPG">
+<h3>Mora</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Mora',10000)">$10.000</a></div>
+
+<div class="producto"><img src="imagenes/postres8.JPG">
+<h3>Tres Leches Con Gelatina</h3><p>Precio</p>
+<a class="btn-whatsapp" onclick="agregarAlCarrito('Tres Leches Con Gelatina',10000)">
+  $10.000
+</a>
+</div>
+<div class="producto"><img src="imagenes/postres9.JPG">
+<h3>Fresa</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Fresa',10000)">$10.000</a></div>
+
+<div class="producto"><img src="imagenes/postres10.JPG">
+<h3>Napoleon Con Arequipe O Melado De Frutos Rojos</h3><p>Precio</p>
+<a class="btn-whatsapp" onclick="agregarAlCarrito('Napoleon Con Arequipe O Melado De Frutos Rojos',10000)">
+  $10.000
+</a></div>
+<div class="producto"><img src="imagenes/postres11.JPG">
+<h3>Leche Asada</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Leche Asada',10000)">$10.000</a></div>
+
+</div>
+
+<!-- POSTRES EN GENERAL -->
+<h3 id="postres-en-general" class="titulo-seccion">🍰 Postres en general</h3>
+<div class="productos-grid">
+<div class="producto"><img src="imagenes/comestibles1.JPG">
+<h3>Arroz Con Leche</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Arroz Con Leche',8000)">
+  $8.000
+</a></div>
+
+<div class="producto"><img src="imagenes/comestibles2.JPG"><h3>Vaso De Gelatina</h3>
+<p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Vaso De Gelatina',5000)">
+  $5.000
+</a></div>
+
+<div class="producto"><img src="imagenes/comestibles3.JPG"><h3>Merengon</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Merengon',13000)">
+  $13.000
+</a></div>
+<div class="producto"><img src="imagenes/comestibles4.JPG"><h3>Mielmesabe Con Queso</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Mielmesabe Con Queso',12000)">
+  $12.000
+</a></div>
+<div class="producto"><img src="imagenes/comestibles5.JPG"><h3>Mielmesabe Mixto</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Mielmesabe Mixto',14000)">
+  $14.000
+</a></div>
+<div class="producto"><img src="imagenes/comestibles6.JPG"><h3>Brevas Con Arequipe Y Queso</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Brevas Con Arequipe Y Queso',12000)">
+  $12.000
+</a></div>
+<div class="producto"><img src="imagenes/comestibles7.JPG"><h3>Mielmesabe Solo</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Mielmesabe Solo',14000)">
+  $14.000
+</a></div>
+<div class="producto"><img src="imagenes/comestibles8.JPG"><h3>Mielmesabe Pequeño</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Mielmesabe Pequeño',6000)">
+  $6.000
+</a></div>
+
+<div class="producto"><img src="imagenes/comestibles9.JPG"><h3>Obleas:Arequipe, queso, salsa de mora,
+ fresa y leche condensada, melado de frutos rojos y crema de la casa </h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Obleas',8000)">
+  $8.000
+</a></div>
+
+<div class="producto"><img src="imagenes/comestibles10.JPG"><h3>Arequipe y Queso</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Arequipe y Queso',6000)">
+  $6.000
+</a></div>
+
+<div class="producto"><img src="imagenes/comestibles11.JPG">
+<h3>Arequipe</h3><p>Precio</p>
+<a class="btn-whatsapp" onclick="agregarAlCarrito('Arequipe Pequeño',4000)">Pequeño:$4.000</a>
+<a class="btn-whatsapp" onclick="agregarAlCarrito('Arequipe Mediano',6000)">Mediano:$6.000</a>
+<a class="btn-whatsapp" onclick="agregarAlCarrito('Arequipe Grande',9000)">Grande:$9.000</a>
+</div>
+
+<div class="producto"><img src="imagenes/comestibles12.JPG"><h3>Brevas Rellenas De Arequipe, Brevas En Almibar, Mielmesabe, Melado De Frutos Rojos</h3>
+<p>$6.000</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Brevas Rellenas De Arequipe, Brevas En Almibar, Mielmesabe, Melado De Frutos Rojos',6000)">Pedir</a></div>
+<div class="producto"><img src="imagenes/comestibles13.JPG"><h3>Quesadillas</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Quesadillas',3000)">
+  $3.000
+</a></div>
+
+<div class="producto"><img src="imagenes/comestibles14.JPG"><h3>Quesillo Doble Crema</h3><p>Precio</p>
+<a class="btn-whatsapp" onclick="agregarAlCarrito('Quesillo Doble Crema Pequeño',4000)">Pequeño:$4.000</a>
+<a class="btn-whatsapp" onclick="agregarAlCarrito('Quesillo Doble Crema Cuarto',6000)">Cuarto:$6.000</a>
+<a class="btn-whatsapp" onclick="agregarAlCarrito('Quesillo Doble Crema Media Libra',9000)">Media Libra:$9.000</a>
+<a class="btn-whatsapp" onclick="agregarAlCarrito('Quesillo Doble Crema Libra',16000)">Libra:$16.000</a>
+</div>
+
+</div>
+
+<!-- BIZCOCHOS -->
+<h3 id="bizcochos" class="titulo-seccion">🧀 Bizcochos</h3>
+<div class="productos-grid">
+<div class="producto"><img src="imagenes/comestibles15.JPG"><h3>Alchira Cuajada</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Alchira Cuajada',6000)">$6.000</a></div>
+<div class="producto"><img src="imagenes/comestibles16.JPG"><h3>Pandeyuca, Almojabana</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Pandeyuca, Almojabana',3000)">$3.000</a></div>
+<div class="producto"><img src="imagenes/comestibles17.JPG"><h3>mantecada</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('mantecada',3000)">$3.000</a></div>
+<div class="producto"><img src="imagenes/comestibles18.JPG"><h3>Rosquitas Llaneras</h3><p>Precio</p><a class="btn-whatsapp" onclick="agregarAlCarrito('Rosquitas Llaneras',6000)">$6.000</a></div>
+
+</div>
+
+
+<!-- BEBIDAS -->
+<h3 id="bebidas" class="titulo-seccion">🥤 Bebidas</h3>
+
+<div class="productos-grid">
+
+  <div class="producto">
+    <img src="imagenes/bebidas1.JPG">
+    <h3>Kumis, Yogurt (fresa,melocoton) Y Avena</h3>
+    <p style="font-size:.9em;color:#555;">
+    </p>
+    <a class="btn-whatsapp" onclick="agregarAlCarrito('Kumis, Yogurt Y Avena',5000)">$5.000</a>
+  </div>
+
+  <div class="producto">
+    <img src="imagenes/bebidas10.JPG">
+    <h3>Masato</h3>
+    <p style="font-size:.85em;color:#555;">Personal</p>
+    <a class="btn-whatsapp" onclick="agregarAlCarrito('Masato',4000)">$4.000</a>
+  </div>
+
+  <div class="producto">
+    <img src="imagenes/envases.JPG">
+    <h3>Envases Para Llevar</h3>
+    <p style="font-size:.85em;color:#555;">Café caliente</p>
+    <a class="btn-whatsapp" onclick="agregarAlCarrito('Envases Para Llevar Pequeño',5000)">Pequeño:$5.000</a>
+    <a class="btn-whatsapp" onclick="agregarAlCarrito('Envases Para Llevar Medio Litro',9000)">Medio Litro:$9.000</a>
+    <a class="btn-whatsapp" onclick="agregarAlCarrito('Envases Para Llevar Litro',16000)">Litro:$16.000</a>
+  </div>
+
+
+   <div class="producto">
+    <img src="imagenes/bebidas6.JPG">
+    <h3>Milo</h3>
+    <p style="font-size:.85em;color:#555;">m</p>
+    <a class="btn-whatsapp" onclick="agregarAlCarrito('Milo Frio',8000)">Frio:$8.000</a>
+    <a class="btn-whatsapp" onclick="agregarAlCarrito('Milo Caliente',6000)">Caliente:$6.000</a>
+  </div>
+
+
+    <div class="producto">
+    <img src="imagenes/bebidas8.JPG">
+    <h3>Coca Cola</h3>
+    <p style="font-size:.85em;color:#555;">m</p>
+    <a class="btn-whatsapp" onclick="agregarAlCarrito('Coca Cola Pequeña',2500)">Pequeña:$2.500</a>
+    <a class="btn-whatsapp" onclick="agregarAlCarrito('Coca Cola Personal',4000)">Personal:$4.000</a>
+    <a class="btn-whatsapp" onclick="agregarAlCarrito('Coca Cola Grande 1.5L',8000)">Grande 1.5L:$8.000</a>
+  </div>
+
+    <div class="producto">
+    <img src="imagenes/bebidas9.JPG">
+    <h3>Agua</h3>
+    <p style="font-size:.85em;color:#555;">m</p>
+    <a class="btn-whatsapp" onclick="agregarAlCarrito('Agua Pequeña',2000)">Pequeña:$2.000</a>
+    <a class="btn-whatsapp" onclick="agregarAlCarrito('Agua Personal',3000)">Personal:$3.000</a>
+    <a class="btn-whatsapp" onclick="agregarAlCarrito('Agua Con Gas',4000)">Con Gas:$4.000</a>
+  </div>
+
+    <div class="producto">
+    <img src="imagenes/bebidas11.JPG">
+    <h3>Gatorade</h3>
+    <p style="font-size:.85em;color:#555;">m</p>
+    <a class="btn-whatsapp" onclick="agregarAlCarrito('Gatorade',5000)">$5.000</a>
+  </div>
+
+
+      <div class="producto">
+    <img src="imagenes/bebidas12.JPG">
+    <h3>Speed Max</h3>
+    <p style="font-size:.85em;color:#555;">m</p>
+    <a class="btn-whatsapp" onclick="agregarAlCarrito('Speed Max',5000)">$5.000</a>
+  </div>
+
+        <div class="producto">
+    <img src="imagenes/bebidas13.JPG">
+    <h3>Red Bull</h3>
+    <p style="font-size:.85em;color:#555;">m</p>
+    <a class="btn-whatsapp" onclick="agregarAlCarrito('Red Bull',8000)">$8.000</a>
+  </div>
+
+        <div class="producto">
+    <img src="imagenes/bebidas14.JPG">
+    <h3>Soda</h3>
+    <p style="font-size:.85em;color:#555;">m</p>
+    <a class="btn-whatsapp" onclick="agregarAlCarrito('Soda',5000)">$5.000</a>
+  </div>
+
+
+</div>
+
+<!-- CARRITO DE COMPRA -->
+<section id="carrito">
+<h2>🛒 Tu Pedido</h2>
+
+<div id="lista-carrito">
+<p>Aún no has agregado productos</p>
+</div>
+
+<h3 id="total">Total: $0</h3>
+
+<button id="enviar-whatsapp">Enviar pedido por WhatsApp</button>
+
+</section>
+
+</section>
+
+<section id="pago">
+<h2>Pagos</h2>
+<p>Realiza el pago y envía el comprobante por WhatsApp.</p>
+</section>
+
+<section id="metodos-pago">
+
+<h2>💳 Métodos de Pago</h2>
+
+<p>Puedes pagar transfiriendo al número.  
+Luego envía el comprobante por WhatsApp junto con tu pedido.</p>
+
+<div class="pagos-grid">
+
+<div class="pago-box">
+<h3>📱 Nequi</h3>
+
+<img src="imagenes/nequi.JPG" alt=" Nequi">
+
+<p><strong>Número:</strong> 3112527088</p>
+
+</div>
+
+<div class="pago-box">
+<h3>🏦 Daviplata</h3>
+
+<img src="imagenes/daviplata.JPG" alt=" Daviplata">
+
+<p><strong>Cuenta:</strong> 3112527088</p>
+
+
+</div>
+
+</div>
+
+<p style="margin-top:20px;">
+Después de pagar, presiona <strong>Enviar pedido por WhatsApp</strong> y adjunta el comprobante.
+</p>
+
+</section>
+
+<footer>
+© 2026 La Vaca que Canta · Ibagué 🐄
+</footer>
+
+</div>
+
+<script>
+
+let carrito = [];
+
+function agregarAlCarrito(nombre, precio){
+
+  let aviso = document.getElementById("aviso-carrito");
+
+aviso.style.opacity = "1";
+
+setTimeout(() => {
+aviso.style.opacity = "0";
+}, 2000);
+
+let productoExistente = carrito.find(p => p.nombre === nombre);
+
+if(productoExistente){
+productoExistente.cantidad++;
+}else{
+carrito.push({nombre, precio, cantidad:1});
+}
+
+mostrarCarrito();
+
+}
+
+function mostrarCarrito(){
+  let cantidadTotal = 0;
+
+carrito.forEach(producto => {
+cantidadTotal += producto.cantidad;
+});
+
+document.getElementById("contador-carrito").textContent = cantidadTotal;
+
+let lista = document.getElementById("lista-carrito");
+let total = 0;
+
+lista.innerHTML = "";
+
+if(carrito.length === 0){
+lista.innerHTML = "<p>Aún no has agregado productos</p>";
+document.getElementById("total").textContent = "Total: $0";
+return;
+}
+
+carrito.forEach((producto, index) => {
+
+let subtotal = producto.precio * producto.cantidad;
+
+total += subtotal;
+
+let item = document.createElement("p");
+
+item.innerHTML = `
+${producto.nombre} - $${producto.precio}  
+Cantidad: 
+<button onclick="cambiarCantidad(${index}, -1)">➖</button>
+${producto.cantidad}
+<button onclick="cambiarCantidad(${index}, 1)">➕</button>
+<button onclick="eliminarProducto(${index})">❌</button>
+<br>Subtotal: $${subtotal}
+`;
+
+lista.appendChild(item);
+
+});
+
+document.getElementById("total").textContent = "Total: $" + total;
+
+}
+
+function cambiarCantidad(index, cambio){
+
+carrito[index].cantidad += cambio;
+
+if(carrito[index].cantidad <= 0){
+carrito.splice(index,1);
+}
+
+mostrarCarrito();
+
+}
+
+function eliminarProducto(index){
+
+carrito.splice(index,1);
+
+mostrarCarrito();
+
+}
+
+document.getElementById("enviar-whatsapp").addEventListener("click", function(){
+
+if(carrito.length === 0){
+alert("El carrito está vacío");
+return;
+}
+
+let mensaje = "Hola, quiero hacer este pedido:%0A%0A";
+let total = 0;
+
+carrito.forEach(producto => {
+
+let subtotal = producto.precio * producto.cantidad;
+
+mensaje += `• ${producto.nombre} x${producto.cantidad} - $${subtotal}%0A`;
+
+total += subtotal;
+
+});
+
+mensaje += `%0A💰 Total del pedido: $${total}%0A%0A`;
+mensaje += `Voy a realizar el pago por Nequi o Daviplata y enviaré el comprobante de pago.`;
+
+window.open("https://wa.me/573108065132?text=" + mensaje);
+
+});
+
+function abrirCarrito(){
+document.getElementById("carrito-ventana").style.display = "block";
+}
+
+function cerrarCarrito(){
+document.getElementById("carrito-ventana").style.display = "none";
+}
+
+document.getElementById("cerrar-carrito").onclick = cerrarCarrito;
+
+window.addEventListener("click", function(event){
+
+let ventana = document.getElementById("carrito-ventana");
+
+if(event.target === ventana){
+ventana.style.display = "none";
+}
+
+});
+
+</script>
+
+</body>
+</html>
